@@ -24,7 +24,7 @@
             <p name="bookNum">xxx157231110</p>
         </div>
         <div class="interactables">
-            <button>Add Student to Blacklist</button>
+            <button name="blacklistStudent" id="blacklist">Add Student to Blacklist</button>
             <button>Change Date</button>
             <button>Cancel Booking</button>
             <button>Add Infraction</button>
@@ -60,5 +60,15 @@
             transition:all .5s;
         }
     </style>
+    <script>
+        document.getElementById("blacklist").addEventListener(onclick,()=>{
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/blacklistStudent", true)
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.send(JSON.stringify({
+                id:document.getElementsByName("ID").innerText
+            }))
+        }) 
+    </script>
 </body>
 </html>
