@@ -10,6 +10,6 @@ app.use(express.urlencoded({extended:false}))
 
 
 app.get('/', (req, res)=>{
-  res.render('pages\\signup')
+  res.render('pages\\bookingInfo')
 })
 

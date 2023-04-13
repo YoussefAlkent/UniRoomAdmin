@@ -8,5 +8,57 @@
 </head>
 <body>
     <%- include('../partials/navbar') %>
+    <div class="main__container">
+        <div class="information">
+            <h3>Student Name:</h3>
+            <p name="StudentName">John Doe</p>
+            <h3>Student ID:</h3>
+            <p name="ID">20100xxx</p>
+            <h3>Attendance Rate:</h3>
+            <p name="attendance">99%</p>
+            <h3>Standing:</h3>
+            <p name="standing">Good Standing</p>
+            <h3>Room Number/Building Number</h3>
+            <p name="roomBuildingNumber">15/7</p>
+            <h3>Booking Number</h3>
+            <p name="bookNum">xxx157231110</p>
+        </div>
+        <div class="interactables">
+            <button>Add Student to Blacklist</button>
+            <button>Change Date</button>
+            <button>Cancel Booking</button>
+            <button>Add Infraction</button>
+        </div>
+    </div>
+    <style>
+        .main__container{
+            width: 100%;
+            text-align: center;
+        }
+        .main__container > div{
+            display: inline-block;
+            margin: 0 auto;
+            padding: 3px;
+        }
+        .information > *{
+            text-align:left;
+            padding:5px
+        }
+        .interactables{
+            display:inline-block;
+            vertical-align: middle;
+
+        }
+        .interactables > button{
+            background-color:beige;
+            border:none;
+            padding: 15px 35px;
+            transition:all .5s;
+        }
+        .interactables > button:hover{
+            background-color: blueviolet;
+            transition:all .5s;
+        }
+    </style>
 </body>
 </html>
