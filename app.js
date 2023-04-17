@@ -64,4 +64,15 @@ app.get('/bookingInfo', (req,res)=>{
   })
 
 })
+app.post('/SignUpAttempt', (req,res)=>{
+  var emailRequest = req.body.SignInEmail
+  transporter.sendMail({
+    from:email,
+    to:'Youssefalkent@gmail.com', //placeholder
+    subject:'This Email is requesting access as admin',
+    text:"This email \"" + email + "\" is requesting access to be an admin"
+  },(err,info)=>{
+    if (err) throw err; else console.log("email send" + info.response)
+  })
+})
 
