@@ -76,7 +76,7 @@ app.post('/SignUpAttempt', (req,res)=>{
 })
 app.post('/blacklistStudent', (req,res)=>{
   var user = req.body.ID
-  let query = "" //query here
+  let query = "INSERT INTO `aiuroom`.`blacklist`(`Reason`,`StudentId`)  VALUES ('',  "+ req.body.ID+");" //query here
 })
 app.post('/cancelBooking', (req,res)=>{
   var user = req.body.ID
@@ -84,11 +84,11 @@ app.post('/cancelBooking', (req,res)=>{
 })
 app.post('/changeDate', (req,res)=>{
   var user = req.body.ID
-  let query = "" //query here
+  let query = "UPDATE `aiuroom`.`booking` SET  `StartTime` = 'StartTime:' ,  `EndTime` = 'EndTime:' WHERE `roomid` =  "+ req.body.roomNum;";" //query here
 })
 app.post('/addInfraction', (req,res)=>{
   var user = req.body.ID
-  let query = "" //query here
+  let query = "INSERT INTO `aiuroom`.`infraction`  (`SID`,  `infraction_count`,  `reason`)  VALUES  ("+ req.body.ID+",  'infraction_count:',  'reason:');  " //query here
 })
 app.post('/searchStudent', (req,res)=>{
   var ID = req.body.searchID
@@ -102,6 +102,7 @@ app.post('/searchStudent', (req,res)=>{
   con.query(query, (err,result)=>{
     if (err) throw err; else{
       name = result[6]
+      attendance=result[5]
     }
   let query = ("SELECT * FROM aiuroom.booking WHERE NID =" + ID)
   con.query(query, (err, result)=>{
@@ -114,7 +115,7 @@ app.post('/searchStudent', (req,res)=>{
     res.render("pages\\bookingInfo", {
       name:name,
       attendance:attendance,
-      standing:standing,
+      standing:"good",
       roomNum:roomNum,
       bookingNum:bookingNum
     })
