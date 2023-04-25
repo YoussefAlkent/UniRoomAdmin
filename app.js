@@ -39,8 +39,8 @@ app.get('/', (req, res)=>{
 })
 app.post('/login', (req, res, next)=>{
   var [name, pass] = req.body;
-  let query = "SELECT * FROM person WHERE email=?"
-  con.query(query, name, (err, result)=>{
+  let query = "SELECT * FROM person WHERE email=" + name
+  con.query(query, (err, result)=>{
     if(result.password == pass){
       const token = jwt.sign(user, secretPhrase, {expiresIn:"3h"})
       res.cookie('token', token, {
