@@ -76,15 +76,27 @@ app.post('/SignUpAttempt', (req,res)=>{
 })
 app.post('/blacklistStudent', (req,res)=>{
   var user = req.body.ID
-  let query = "INSERT INTO `aiuroom`.`blacklist`(`Reason`,`StudentId`)  VALUES ('',  "+ req.body.ID+");" //query here
+  var reason = req.body.reason
+  let query = "INSERT INTO aiuroom.blacklist(`Reason`,`StudentId`)  VALUES ('"+ reason +"',  "+ user +");" //query here
+  con.query(query, (err, result)=>{
+    if (err) throw err;
+  })
 })
 app.post('/cancelBooking', (req,res)=>{
   var user = req.body.ID
-  let query = "INSERT INTO blacklist (Studentid) VALUES ("+ req.body.ID+");" //query here
+  let query = "DELETE FROM aiuroom.booking  WHERE NID=" + user; //query here
+  con.query(query, (err, result)=>{
+    if (err) throw err;
+  })
 })
 app.post('/changeDate', (req,res)=>{
   var user = req.body.ID
-  let query = "UPDATE `aiuroom`.`booking` SET  `StartTime` = 'StartTime:' ,  `EndTime` = 'EndTime:' WHERE `roomid` =  "+ req.body.roomNum;";" //query here
+  var startTime = req.body.startTime
+  var endTime = req.body.endTime
+  let query = "UPDATE aiuroom.booking SET  `StartTime` = "+ startTime +",  `EndTime` = "+ endTime +" WHERE `roomid` =  "+ req.body.roomNum;";" //query here
+  con.query(query, (err, result)=>{
+    if (err) throw err;
+  })
 })
 app.post('/addInfraction', (req,res)=>{
   var user = req.body.ID
@@ -114,8 +126,9 @@ app.post('/searchStudent', (req,res)=>{
     }
     res.render("pages\\bookingInfo", {
       name:name,
+      ID:ID,
       attendance:attendance,
-      standing:"good",
+      standing:standing,
       roomNum:roomNum,
       bookingNum:bookingNum
     })
