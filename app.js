@@ -35,7 +35,8 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 
 app.get('/', (req, res)=>{
-  res.render('pages\\index')
+  res.render('pages\\bookingInfo')
+  res.redirect('/bookingInfo')
 })
 app.post('/login', (req, res, next)=>{
   var [name, pass] = req.body;
@@ -60,9 +61,8 @@ app.post('/login', (req, res, next)=>{
 app.get('/bookingInfo', (req,res)=>{
   let query='SELECT * FROM student'
   con.query(query, "", (err, result)=>{
-    res.render("pages\\booking", {studentList:result})
   })
-
+  res.render("pages\\booking", {studentList:result})
 })
 app.post('/SignUpAttempt', (req,res)=>{
   var emailRequest = req.body.SignInEmail
@@ -75,4 +75,50 @@ app.post('/SignUpAttempt', (req,res)=>{
     if (err) throw err; else console.log("email send" + info.response)
   })
 })
-
+app.post('/blacklistStudent', (req,res)=>{
+  var user = req.body.ID
+  let query = "" //query here
+})
+app.post('/cancelBooking', (req,res)=>{
+  var user = req.body.ID
+  let query = "INSERT INTO blacklist (Studentid) VALUES ("+ req.body.ID+");" //query here
+})
+app.post('/changeDate', (req,res)=>{
+  var user = req.body.ID
+  let query = "" //query here
+})
+app.post('/addInfraction', (req,res)=>{
+  var user = req.body.ID
+  let query = "" //query here
+})
+app.post('/searchStudent', (req,res)=>{
+  var ID = req.body.searchID
+  var name ="John Doe"
+  var attendance = "100%"
+  var standing = "Good Standing"
+  var roomNum = "N/A"
+  var bookingNum = "N/A"
+  console.log(req.body)
+  let query = "SELECT * FROM aiuroom.student WHERE SID ="+ ID
+  con.query(query, (err,result)=>{
+    if (err) throw err; else{
+      name = result[6]
+    }
+  let query = ("SELECT * FROM aiuroom.booking WHERE NID =" + ID)
+  con.query(query, (err, result)=>{
+    if (err) throw err; else{
+      if(result != null){
+       roomNum = result[4]
+       bookingNum = result[3]
+      }
+    }
+    res.render("pages\\bookingInfo", {
+      name:name,
+      attendance:attendance,
+      standing:standing,
+      roomNum:roomNum,
+      bookingNum:bookingNum
+    })
+  })
+  })
+})

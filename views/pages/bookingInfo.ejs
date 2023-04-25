@@ -8,6 +8,12 @@
 </head>
 <body>
     <%- include('../partials/navbar') %>
+    <div class="search__container">
+        <form action="/searchStudent" method="post">
+            <input type="text" placeholder="Enter ID Here" name="searchID" class="searchIn">
+            <input type="submit" hidden>
+        </form>
+    </div>
     <div class="main__container">
         <div class="information">
             <h3>Student Name:</h3>
@@ -24,10 +30,39 @@
             <p name="bookNum">xxx157231110</p>
         </div>
         <div class="interactables">
-            <button name="blacklistStudent" id="blacklist">Add Student to Blacklist</button>
-            <button>Change Date</button>
+            <!-- <button name="blacklistStudent" id="blacklist">Add Student to Blacklist</button> -->
+            <form>
+                <input type="button" value="Blacklist Student" onclick="showBlacklistReason">
+                <div class="form-popup" id="myForm" hidden>
+                    <form action="/blacklistStudent" class="form-container" method="post">
+                      <h1>Enter the Reason</h1>
+                  
+                      <label for="email"><b>Reason</b></label>
+                      <input type="text" placeholder="Enter reason for blacklist" name="reason" required>
+                  
+                      <label for="psw"><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" name="psw" required>
+                  
+                      <button type="submit" class="btn">Submit</button>
+                      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                  </div>
+            </form>
+            <form action="/cancelBooking" method="post">
+                <input type="submit" value="Cancel Booking">
+            </form>
+            <form action="/changeDate" method="post">
+                <input type="submit" value="change Date">
+            </form>
+            <form action="/addInfraction" method="post">
+                <input type="submit" value="Add Infraction">
+            </form>
+            <!-- <button>Change Date</button>
             <button>Cancel Booking</button>
-            <button>Add Infraction</button>
+            <button>Add Infraction</button> -->
+        </div>
+        <div class="SeachBar">
+            
         </div>
     </div>
     <style>
@@ -49,26 +84,33 @@
             vertical-align: middle;
 
         }
-        .interactables > button{
+        .interactables > form >*{
             background-color:beige;
             border:none;
             padding: 15px 35px;
             transition:all .5s;
         }
-        .interactables > button:hover{
+        .interactables > form > *:hover{
             background-color: blueviolet;
             transition:all .5s;
         }
+        .search__container{
+            display:flex;
+            justify-content: center;
+        }
+        .search__container > input{
+            border-style: none;
+            background-color: bisque;
+            size: 200px 200px 100px 100pxk;
+        }
+        .searchIn{
+            width:100%
+        }
     </style>
     <script>
-        document.getElementById("blacklist").addEventListener(onclick,()=>{
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/blacklistStudent", true)
-            xhr.setRequestHeader('Content-Type', 'application/json')
-            xhr.send(JSON.stringify({
-                id:document.getElementsByName("ID").innerText
-            }))
-        }) 
+        function showBlacklistReason(){
+            document.getElementById("myForm").hidden = false;
+        }
     </script>
 </body>
 </html>
