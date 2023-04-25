@@ -35,8 +35,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 
 app.get('/', (req, res)=>{
-  res.render('pages\\bookingInfo')
-  res.redirect('/bookingInfo')
+  res.render('pages\\bookinginfo')
 })
 app.post('/login', (req, res, next)=>{
   var [name, pass] = req.body;
