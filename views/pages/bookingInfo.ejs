@@ -20,17 +20,17 @@
     <div class="main__container">
         <div class="information">
             <h3>Student Name:</h3>
-            <p name="StudentName">John Doe</p>
+            <p name="StudentName"><%=name%></p>
             <h3>Student ID:</h3>
-            <p name="ID">20100xxx</p>
+            <p name="ID"><%=ID%></p>
             <h3>Attendance Rate:</h3>
-            <p name="attendance">99%</p>
+            <p name="attendance"><%=attendance%></p>
             <h3>Standing:</h3>
-            <p name="standing">Good Standing</p>
+            <p name="standing"><%=standing%></p>
             <h3>Room Number/Building Number</h3>
-            <p name="roomBuildingNumber">15/7</p>
+            <p name="roomBuildingNumber"><%=roomNum%></p>
             <h3>Booking Number</h3>
-            <p name="bookNum">xxx157231110</p>
+            <p name="bookNum"><%=bookingNum%></p>
         </div>
         <div class="interactables">
             <button name="blacklistStudent" id="blacklist" onclick="prompt('enter the reason for the blacklisting:')">Add Student to Blacklist</button>
