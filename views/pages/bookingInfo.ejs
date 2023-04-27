@@ -33,10 +33,90 @@
             <p name="bookNum"><%=bookingNum%></p>
         </div>
         <div class="interactables">
-            <button name="blacklistStudent" id="blacklist" onclick="prompt('enter the reason for the blacklisting:')">Add Student to Blacklist</button>
-            <button onclick="prompt('Enter new start date/End date :')">Change Date</button>
-            <button onclick="if(confirm('Are you sure you want to cancel this booking?')){submitBookingCancel()}">Cancel Booking</button>
-            <button onclick="prompt('Enter infraction:')">Add Infraction</button>
+            <button name="blacklistStudent" id="blacklist" onclick="addStudentToBlacklist()">Add Student to Blacklist</button>
+
+            <script>
+            function addStudentToBlacklist() {
+              var reason = prompt('Enter the reason for the blacklisting:');
+              
+              fetch('/blacklistStudent', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ reason })
+              })
+              .then(response => response.json())
+              .then(data => console.log(data))
+              .catch(error => console.error(error));
+            }
+            </script>
+            
+            <button onclick="changeDate()">Change Date</button>
+            
+            <script>
+            function changeDate() {
+              var startDate = prompt('Enter new start date:');
+              var endDate = prompt('Enter new end date:');
+              
+              fetch('/changeDate', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ startDate, endDate })
+              })
+              .then(response => response.json())
+              .then(data => console.log(data))
+              .catch(error => console.error(error));
+            }
+            </script>
+            
+            <button onclick="cancelBooking()">Cancel Booking</button>
+            
+            <script>
+            function cancelBooking() {
+              var confirmation = prompt('Are you sure you want to cancel this booking?');
+              
+              if (confirmation) {
+                fetch('/cancelBooking', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ confirmation })
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+              }
+            }
+            </script>
+            
+            
+            <button onclick="addInfraction()">Add Infraction</button>
+            
+            <script>
+            function addInfraction() {
+              var infraction = prompt('Enter infraction:');
+              
+              if (infraction) {
+                fetch('/addInfraction', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ infraction })
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+              }
+            }
+            </script>
+            
+            
+            
           </div>
     </div>
     <style>

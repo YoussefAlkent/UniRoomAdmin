@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const ejs = require('ejs')
 const sql = require('mysql')
 const nodemailer = require('nodemailer')
@@ -76,32 +77,60 @@ app.post('/SignUpAttempt', (req,res)=>{
 })
 app.post('/blacklistStudent', (req,res)=>{
   var user = req.body.ID
-  var reason = req.body.reason
-  let query = "INSERT INTO aiuroom.blacklist(`Reason`,`StudentId`)  VALUES ('"+ reason +"',  "+ user +");" //query here
-  con.query(query, (err, result)=>{
-    if (err) throw err;
-  })
-})
+    // handle adding a student to the blacklist
+   var reason = req.body.reason;
+    console.log(reason);
+    // do something with the reason, e.g. add the student to the blacklist
+    res.json({ message: 'Student added to blacklist' });
+    let query = "INSERT INTO aiuroom.blacklist(`Reason`,`StudentId`)  VALUES ('"+ reason +"',  "+ user +");" //query here
+    con.query(query, (err, result)=>{
+      if (err) throw err;
+    })
+    });
+
+
 app.post('/cancelBooking', (req,res)=>{
   var user = req.body.ID
+  
+    // handle canceling a booking
+    var confirmation = req.body.confirmation;
+    console.log(confirmation);
+    if (confirmation) {
+      // do something to cancel the booking
+      res.json({ message: 'Booking canceled' });
+    } else {
+      res.json({ message: 'Confirmation required to cancel booking' });
+    }
+  });
   let query = "DELETE FROM aiuroom.booking  WHERE NID=" + user; //query here
   con.query(query, (err, result)=>{
     if (err) throw err;
   })
-})
+
 app.post('/changeDate', (req,res)=>{
   var user = req.body.ID
-  var startTime = req.body.startTime
-  var endTime = req.body.endTime
+    // handle changing the date
+    var startDate = req.body.startDate;
+    var endDate = req.body.endDate;
+    console.log(startDate);
+    console.log(endDate);
+    // do something with the new dates, e.g. update the start and end date of a booking
+    res.json({ message: 'Date changed' });
   let query = "UPDATE aiuroom.booking SET  `StartTime` = "+ startTime +",  `EndTime` = "+ endTime +" WHERE `roomid` =  "+ req.body.roomNum;";" //query here
   con.query(query, (err, result)=>{
     if (err) throw err;
   })
-})
+});
 app.post('/addInfraction', (req,res)=>{
-  var user = req.body.ID
-  let query = "INSERT INTO `aiuroom`.`infraction`  (`SID`,  `infraction_count`,  `reason`)  VALUES  ("+ req.body.ID+",  'infraction_count:',  'reason:');  " //query here
-})
+  var user = req.body.ID 
+    // handle adding an infraction
+    var infraction = req.body.infraction;
+    console.log(infraction);
+    // do something with the infraction, e.g. add it to a student's record
+    res.json({ message: 'Infraction added' });
+    let query = "INSERT INTO `aiuroom`.`infraction`  (`SID`,  `infraction_count`,  `reason`)  VALUES  ("+ req.body.ID+",  'infraction_count:',  'reason:');  " //query here
+  });  
+  
 app.post('/searchStudent', (req,res)=>{
   var ID = req.body.searchID
   var name ="John Doe"
