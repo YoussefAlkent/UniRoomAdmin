@@ -39,10 +39,16 @@ app.get('/', (req, res)=>{
   res.render('pages\\bookinginfo')
 })
 app.post('/login', (req, res, next)=>{
-  var [name, pass] = req.body;
-  let query = "SELECT * FROM person WHERE email=" + name
+  var cookieUser = jwt.verify(req.cookie.token, secretPhrase)
+  let queryCheck = 'SELECT * FROM aiuroom.person WHERE email=' + cookieUser;
+  con.query(queryCheck, (err, result)=>{
+    if (err) console.log(err); else next();
+  })
+  var name = req.body.ID;
+  var pass = req.body.Password
+  let query = "SELECT * FROM person WHERE Universityemail=" + name
   con.query(query, (err, result)=>{
-    if(result.password == pass){
+    if(result[0].Password == pass){
       const token = jwt.sign(user, secretPhrase, {expiresIn:"3h"})
       res.cookie('token', token, {
         httpOnly:true
@@ -163,4 +169,15 @@ app.post('/searchStudent', (req,res)=>{
     })
   })
   })
+})
+app.get('/searchStudent', (req,res)=>{
+  res.render("pages\\bookingInfo", {
+    name:N/A,
+    ID:N/A,
+    attendance:N/A,
+    standing:N/A,
+    roomNum:N/A,
+    bookingNum:N/A
+  })
+  res.json({"Page-Status":"Student Search Rendered"})
 })

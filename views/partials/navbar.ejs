@@ -213,20 +213,42 @@
         </div>
         <ul class="navbar__menu">
             <li class="navbar__item">
-                <a href="./pages/studentSearch" class="navbar__links">
+                <a href="/studentSearch" class="navbar__links" onclick="reroute_Search()">
                     Search Student
                 </a>
             </li>
             <li class="navbar__item">
-                <a href="./pages/bookingInfo" class="navbar__links">
+                <a href="/bookingInfo" class="navbar__links" onclick="reroute_Search()">
                     Edit Booking
                 </a>
             </li>
             <li class="navbar__btn">
-                <a href="./pages/login" class="button">
+                <a href="/login" class="button" onclick="reroute_Login()">
                     Log In
                 </a>
             </li>
         </ul>
     </div>
+    <script>
+      function reroute_Search(){
+        fetch('/searchStudent',{
+          method:'GET',
+          headers:{
+            'Content-Type': 'text/html'
+          }
+        }).then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error=> console.error(error))
+      }
+      function reroute_Login(){
+        fetch('/login',{
+          method:'GET',
+          headers:{
+            'Content-Type':'text/html'
+          }
+        }).then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error=> console.error(error))
+      }
+    </script>
 </nav>
