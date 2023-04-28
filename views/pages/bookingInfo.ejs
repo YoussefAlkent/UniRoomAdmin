@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniRoom - Booking Info</title>
+    <link rel=stylesheet href="/public/stylesheets/bookingInfo.css"></link>
 </head>
 <body>
     <%- include('../partials/navbar') %>
@@ -119,115 +120,6 @@
             
           </div>
     </div>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
-       body {
-           font-family: poppins, sans-serif;
-           background: rgb(85,57,57);
-           background: -moz-radial-gradient(circle, rgba(85,57,57,1) 0%, rgba(112,79,79,1) 0%, rgba(71,45,45,1) 57%);
-           background: -webkit-radial-gradient(circle, rgba(85,57,57,1) 0%, rgba(112,79,79,1) 0%, rgba(71,45,45,1) 57%);
-           background: radial-gradient(circle, rgba(85,57,57,1) 0%, rgba(112,79,79,1) 0%, rgba(71,45,45,1) 57%);
-           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#553939",endColorstr="#472d2d",GradientType=1);
-           margin: 0;
-           padding: 0;
-       }
-       .search__container {
-  width: 80%;
-  margin:auto;
-  text-align: center;
-  padding: 10px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  -webkit-box-shadow: 2px 20px 5px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 2px 20px 5px 0px rgba(0,0,0,0.75);
-   box-shadow: 2px 20px 5px 0px rgba(0,0,0,0.75);
-}
-
-.search__wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-}
-
-.searchIn {
-  border: none;
-  border-bottom: 2px solid #ccc;
-  font-size: 18px;
-  padding: 10px;
-  width: 60%;
-  transition: border-bottom-color 0.3s;
-}
-
-.searchIn:focus {
-  outline: none;
-  border-bottom-color: #4CAF50;
-}
-
-.searchBtn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.searchBtn:hover {
-  background-color: #3e8e41;
-  transition: all 0.3s;
-}
-
-   
-
-       .main__container{
-           width: 80%;
-           margin: auto;
-           text-align: center;
-           padding: 20px;
-           background-color: #f5f5f5;
-           border-radius: 10px;
-       }
-       .information {
-           display: flex;
-           flex-wrap: wrap;
-           justify-content: center;
-           gap: 30px;
-           margin-bottom: 30px;
-       }
-       .information h3 {
-           font-size: 20px;
-           font-weight: bold;
-           margin-bottom: 5px;
-       }
-       .information p {
-           font-size: 18px;
-           margin: 0;
-       }
-       .interactables{
-           display:flex;
-           justify-content: center;
-           align-items: center;
-           gap: 20px;
-       }
-       .interactables > button{
-           background-color: #4CAF50;
-           color: white;
-           border:none;
-           padding: 15px 35px;
-           border-radius: 5px;
-           font-size: 18px;
-           cursor: pointer;
-           transition:all .5s;
-       }
-       .interactables > button:hover{
-           background-color: #3e8e41;
-           transition:all .5s;
-       }
-   </style>
     <script>
         document.getElementById("blacklist").addEventListener(onclick,()=>{
             var xhr = new XMLHttpRequest();
