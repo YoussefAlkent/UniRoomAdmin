@@ -36,19 +36,23 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 
 app.get('/', (req, res)=>{
-  res.render('pages\\bookinginfo')
+  res.render('pages\\login', {message:""})
 })
 app.post('/login', (req, res, next)=>{
-  var cookieUser = jwt.verify(req.cookie.token, secretPhrase)
-  let queryCheck = 'SELECT * FROM aiuroom.person WHERE email=' + cookieUser;
-  con.query(queryCheck, (err, result)=>{
-    if (err) console.log(err); else next();
-  })
+  try{
+    var cookieUser = jwt.verify(req.cookie.token, secretPhrase)
+    let queryCheck = 'SELECT * FROM aiuroom.person WHERE email=' + cookieUser;
+    con.query(queryCheck, (err, result)=>{
+      if (err) console.log(err); else next();
+    });
+  } catch{
+    res.render("pages/login", {message:"No cookie user found"});
+  }
   var name = req.body.ID;
   var pass = req.body.Password
   let query = "SELECT * FROM person WHERE Universityemail=" + name
   con.query(query, (err, result)=>{
-    if(result[0].Password == pass){
+    if(result !=null && result[0].Password == pass){
       const token = jwt.sign(user, secretPhrase, {expiresIn:"3h"})
       res.cookie('token', token, {
         httpOnly:true
@@ -58,18 +62,19 @@ app.post('/login', (req, res, next)=>{
       })
       next();
     } else{
-      res.body.password = ""
+      res.render('pages/login', {message:"Could not find account"});
+      //res.body.password = "";
     }
   })
 }, (req, res)=>{
   res.redirect("/bookingInfo")
-})
+});
 app.get('/bookingInfo', (req,res)=>{
   let query='SELECT * FROM student'
   con.query(query, "", (err, result)=>{
   })
   res.render("pages\\booking", {studentList:result})
-})
+});
 app.post('/SignUpAttempt', (req,res)=>{
   var emailRequest = req.body.SignInEmail
   transporter.sendMail({
@@ -96,22 +101,23 @@ app.post('/blacklistStudent', (req,res)=>{
 
 
 app.post('/cancelBooking', (req,res)=>{
-  var user = req.body.ID
+  let user = req.body.ID;
   
-    // handle canceling a booking
-    var confirmation = req.body.confirmation;
-    console.log(confirmation);
-    if (confirmation) {
-      // do something to cancel the booking
-      res.json({ message: 'Booking canceled' });
-    } else {
-      res.json({ message: 'Confirmation required to cancel booking' });
-    }
-  });
+  // handle canceling a booking
+  var confirmation = req.body.confirmation;
+  console.log(confirmation);
+  if (confirmation) {
+    // do something to cancel the booking
+    res.json({ message: 'Booking canceled' });
+  } else {
+    res.json({ message: 'Confirmation required to cancel booking' });
+  }
+
   let query = "DELETE FROM aiuroom.booking  WHERE NID=" + user; //query here
   con.query(query, (err, result)=>{
     if (err) throw err;
-  })
+  });
+});
 
 app.post('/changeDate', (req,res)=>{
   var user = req.body.ID
