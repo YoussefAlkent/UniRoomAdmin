@@ -13,7 +13,7 @@
         align-items: center;
         justify-content: center;
         font-size: 18px;
-        background-image: linear-gradient(to top, #141414 0%, #491574 100%);
+        background-image: linear-gradient(to top, #141414 0%, #151774 100%);
         background-size: cover;
     }
     
@@ -183,8 +183,6 @@ document.querySelector("#linkLogin").addEventListener("click", e => {
 loginForm.addEventListener("submit", e => {
     e.preventDefault();
 
-    // Perform your AJAX/Fetch login
-
     setFormMessage(loginForm, "error", "Invalid username/password combination");
 });
 
@@ -200,5 +198,15 @@ document.querySelectorAll(".form__input").forEach(inputElement => {
     });
 });
 });
+function redirect_signup(){
+    fetch('/signup',{
+          method:'GET',
+          headers:{
+            'Content-Type': 'text/html'
+          }
+        }).then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error=> console.error(error))
+}
 
 </script>
