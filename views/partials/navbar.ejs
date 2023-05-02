@@ -7,7 +7,7 @@
       }
       
       .navbar {
-        background: #131313;
+        background: #07004d;
         height: 80px;
         display: flex;
         justify-content: center;
@@ -35,8 +35,8 @@
       }
       
       #navbar__logo {
-        background-color: #ff8177;
-        background-image: linear-gradient(to top, #fafafa 0%, #b04ad8 100%);
+        background-color: #3324d8;
+        background-image: linear-gradient(to top, #ffffff 0%, #4a9fd8 100%);
         background-size: 100%;
         -webkit-background-clip: text;
         -moz-background-clip: text;
@@ -103,7 +103,7 @@
       }
       
       .navbar__links:hover {
-        color: #f77062;
+        color: #493dd1;
         transition: all 0.3s ease;
       }
       
@@ -213,17 +213,12 @@
         </div>
         <ul class="navbar__menu">
             <li class="navbar__item">
-                <a href="/studentSearch" class="navbar__links" onclick="reroute_Search()">
+                <a href="/searchStudent" class="navbar__links" onclick="reroute_Search()">
                     Search Student
                 </a>
             </li>
-            <li class="navbar__item">
-                <a href="/bookingInfo" class="navbar__links" onclick="reroute_Search()">
-                    Edit Booking
-                </a>
-            </li>
             <li class="navbar__btn">
-                <a href="/login" class="button" onclick="reroute_Login()">
+                <a href="/" class="button" onclick="reroute_Login()">
                     Log In
                 </a>
             </li>
@@ -241,7 +236,7 @@
         .catch(error=> console.error(error))
       }
       function reroute_Login(){
-        fetch('/login',{
+        fetch('/',{
           method:'GET',
           headers:{
             'Content-Type':'text/html'

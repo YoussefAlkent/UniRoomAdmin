@@ -5,10 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniRoom - Booking Info</title>
-    <link rel=stylesheet href="/public/stylesheets/bookingInfo.css"></link>
+    <link rel=stylesheet href="/public/stylesheets/bookingInfo.css">
 </head>
-<body>
+<header>
     <%- include('../partials/navbar') %>
+</header>
+<body>
+  <div class="body__container">
     <div class="search__container">
         <form action="/searchStudent" method="post">
             <div class="search__wrapper">
@@ -18,20 +21,21 @@
         </form>
     </div>    
     </div>
+    <%- include('../partials/bookingInfoCSS') %>
     <div class="main__container">
         <div class="information">
             <h3>Student Name:</h3>
-            <p name="StudentName"><%=name%></p>
+            <p name="StudentName"><%=name%></p><br>
             <h3>Student ID:</h3>
-            <p name="ID"><%=ID%></p>
+            <p name="ID"><%=ID%></p><br>
             <h3>Attendance Rate:</h3>
-            <p name="attendance"><%=attendance%></p>
+            <p name="attendance"><%=attendance%></p><br>
             <h3>Standing:</h3>
-            <p name="standing"><%=standing%></p>
+            <p name="standing"><%=standing%></p><br>
             <h3>Room Number/Building Number</h3>
-            <p name="roomBuildingNumber"><%=roomNum%></p>
+            <p name="roomBuildingNumber"><%=roomNum%></p><br>
             <h3>Booking Number</h3>
-            <p name="bookNum"><%=bookingNum%></p>
+            <p name="bookNum"><%=bookingNum%></p><br>
         </div>
         <div class="interactables">
             <button name="blacklistStudent" id="blacklist" onclick="addStudentToBlacklist()">Add Student to Blacklist</button>
@@ -117,10 +121,10 @@
             </script>
             
             
-            
+            </div>
           </div>
     </div>
-    <script>
+    <!-- <script>
         document.getElementById("blacklist").addEventListener(onclick,()=>{
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/blacklistStudent", true)
@@ -129,6 +133,6 @@
                 id:document.getElementsByName("ID").innerText
             }))
         }) 
-    </script>
+    </script> -->
 </body>
 </html>
