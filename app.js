@@ -119,6 +119,20 @@ app.post("/blacklistStudent", (req, res) => {
   });
 });
 
+
+app.post('/cancelBooking', (req,res)=>{
+  let user = req.body.ID;
+  
+  // handle canceling a booking
+  var confirmation = req.body.confirmation;
+  console.log(confirmation);
+  if (confirmation) {
+    // do something to cancel the booking
+    res.json({ message: 'Booking canceled' });
+  } else {
+    res.json({ message: 'Confirmation required to cancel booking' });
+  }
+
 app.post("/CancelBooking", (req, res) => {
   var user = req.body.ID;
   console.log("ana hena");
@@ -135,6 +149,8 @@ app.post("/CancelBooking", (req, res) => {
   let query = "DELETE FROM aiuroom.booking  WHERE NID=" + user; //query here
   con.query(query, (err, result) => {
     if (err) throw err;
+  });
+});
   });
 });
 
